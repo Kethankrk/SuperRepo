@@ -45,6 +45,10 @@
                 },
             ];
 
+            var year;
+            var day;
+            var month;
+
             var inputYear = document.getElementById("year");
             var inputMonth = document.getElementById("month");
             var inputDay = document.getElementById("day");
@@ -52,19 +56,61 @@
             var output = document.getElementById("msg");
 
             inputYear.addEventListener("change", (e) => {
-                changeUi(e.target.value, e.target.name);
+                output.innerHTML = "";
+                year = e.target.value;
+                changeUi();
             });
             inputMonth.addEventListener("change", (e) => {
-                changeUi(e.target.value, e.target.name);
+                output.innerHTML = "";
+                month = e.target.value;
+                changeUi();
             });
             inputDay.addEventListener("change", (e) => {
-                changeUi(e.target.value, e.target.name);
+                output.innerHTML = "";
+                day = e.target.value;
+                changeUi();
             });
 
-            const changeUi = (data, type) => {
+            const changeUi = () => {
                 arr.forEach((item) => {
-                    if (item[type] == data) {
-                        output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                    if (year && month && day) {
+                        if (
+                            year == item.year &&
+                            month == item.month &&
+                            day == item.day
+                        ) {
+                            output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                        }
+                    }
+                    if (!year && month && day) {
+                        if (month == item.month && day == item.day) {
+                            output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                        }
+                    }
+                    if (!year && !month && day) {
+                        if (day == item.day) {
+                            output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                        }
+                    }
+                    if (!year && month && !day) {
+                        if (month == item.month) {
+                            output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                        }
+                    }
+                    if (year && !month && !day) {
+                        if (year == item.year) {
+                            output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                        }
+                    }
+                    if (year && month && !day) {
+                        if (year == item.year && month == item.month) {
+                            output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                        }
+                    }
+                    if (year && !month && day) {
+                        if (day == item.day && year == item.year) {
+                            output.innerHTML += `<p>${item.day}-${item.month}-${item.year}</p>`;
+                        }
                     }
                 });
             };
